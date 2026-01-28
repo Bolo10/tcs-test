@@ -1,0 +1,176 @@
+<section class="page">
+  <div class="card">
+    <div class="topbar">
+      <button type="button" class="btn back" (click)="goBack()">
+        Regresar
+      </button>
+    </div>
+    <h1 class="title">
+      {{ isEdit() ? "Editar Producto" : "Formulario de Registro" }}
+    </h1>
+
+    <ng-container *ngIf="!loading(); else skForm">
+      <div *ngIf="loadError()" class="error">{{ loadError() }}</div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" class="grid">
+        <div class="field">
+          <label>ID</label>
+          <input
+            formControlName="id"
+            [class.invalid]="showErr('id')"
+            placeholder="Ingresa ID"
+          />
+          <p class="msg" *ngIf="showErr('id')">
+            <ng-container *ngIf="form.controls.id.errors?.['required']"
+              >ID requerido</ng-container
+            >
+            <ng-container *ngIf="form.controls.id.errors?.['minlength']"
+              >Mínimo 3</ng-container
+            >
+            <ng-container *ngIf="form.controls.id.errors?.['maxlength']"
+              >Máximo 10</ng-container
+            >
+            <ng-container *ngIf="form.controls.id.errors?.['idTaken']"
+              >ID no válido</ng-container
+            >
+          </p>
+        </div>
+
+        <div class="field">
+          <div class="label-row">
+            <label>Nombre</label>
+            <span class="counter">{{ nameCount() }}/100</span>
+          </div>
+
+          <input
+            formControlName="name"
+            [class.invalid]="showErr('name')"
+            placeholder="Ingresa nombre"
+          />
+          <p class="msg" *ngIf="showErr('name')">
+            <ng-container *ngIf="form.controls.name.errors?.['required']"
+              >Nombre requerido</ng-container
+            >
+            <ng-container *ngIf="form.controls.name.errors?.['minlength']"
+              >Mínimo 5</ng-container
+            >
+            <ng-container *ngIf="form.controls.name.errors?.['maxlength']"
+              >Máximo 100</ng-container
+            >
+          </p>
+        </div>
+
+        <div class="field">
+          <div class="label-row">
+            <label>Descripción</label>
+            <span class="counter">{{ descCount() }}/200</span>
+          </div>
+
+          <input
+            formControlName="description"
+            [class.invalid]="showErr('description')"
+            placeholder="Ingresa descripción"
+          />
+          <p class="msg" *ngIf="showErr('description')">
+            <ng-container *ngIf="form.controls.description.errors?.['required']"
+              >Descripción requerida</ng-container
+            >
+            <ng-container
+              *ngIf="form.controls.description.errors?.['minlength']"
+              >Mínimo 10</ng-container
+            >
+            <ng-container
+              *ngIf="form.controls.description.errors?.['maxlength']"
+              >Máximo 200</ng-container
+            >
+          </p>
+        </div>
+
+        <div class="field">
+          <label>Logo</label>
+          <input
+            formControlName="logo"
+            [class.invalid]="showErr('logo')"
+            placeholder="Ingresa URL logo"
+          />
+          <p class="msg" *ngIf="showErr('logo')">Logo requerido</p>
+        </div>
+
+        <div class="field">
+          <label>Fecha Liberación</label>
+          <input
+            type="date"
+            formControlName="date_release"
+            [class.invalid]="showErr('date_release')"
+          />
+          <p class="msg" *ngIf="showErr('date_release')">
+            <ng-container
+              *ngIf="form.controls.date_release.errors?.['required']"
+              >Requerido</ng-container
+            >
+            <ng-container
+              *ngIf="form.controls.date_release.errors?.['releaseBeforeToday']"
+              >Debe ser hoy o posterior</ng-container
+            >
+          </p>
+        </div>
+
+        <div class="field">
+          <label>Fecha Revisión</label>
+          <input type="date" formControlName="date_revision" />
+          <p
+            class="msg"
+            *ngIf="
+              (submitAttempted() || form.touched) &&
+              form.errors?.['revisionNotOneYear']
+            "
+          >
+            Fecha revisión debe ser exactamente 1 año después
+          </p>
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn secondary" (click)="reset()">
+            Reiniciar
+          </button>
+          <button type="submit" class="btn primary" [disabled]="saving()">
+            {{ saving() ? "Guardando..." : "Enviar" }}
+          </button>
+        </div>
+      </form>
+    </ng-container>
+    <ng-template #skForm>
+      <div class="grid">
+        <div class="field">
+          <div class="sk sk-label"></div>
+          <div class="sk sk-input"></div>
+        </div>
+        <div class="field">
+          <div class="sk sk-label"></div>
+          <div class="sk sk-input"></div>
+        </div>
+        <div class="field">
+          <div class="sk sk-label"></div>
+          <div class="sk sk-input"></div>
+        </div>
+        <div class="field">
+          <div class="sk sk-label"></div>
+          <div class="sk sk-input"></div>
+        </div>
+        <div class="field">
+          <div class="sk sk-label"></div>
+          <div class="sk sk-input"></div>
+        </div>
+        <div class="field">
+          <div class="sk sk-label"></div>
+          <div class="sk sk-input"></div>
+        </div>
+
+        <div class="actions">
+          <div class="sk sk-btn"></div>
+          <div class="sk sk-btn"></div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</section>

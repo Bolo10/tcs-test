@@ -1,0 +1,170 @@
+.page {
+  padding: 18px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: min(980px, 96vw);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.title {
+  text-align: center;
+  margin: 8px 0 16px;
+  font-size: 18px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+}
+label {
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+input {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+}
+
+input:disabled {
+  background: #f3f4f8;
+  color: #6b7280;
+}
+
+input.invalid {
+  border-color: #f2b8b5;
+}
+
+.msg {
+  color: #d92d20;
+  margin: 0;
+  font-size: 12px;
+}
+
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.btn {
+  min-width: 160px;
+  max-width: 220px;
+  width: auto;
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.primary {
+  background: var(--primary);
+  border-color: var(--primary-border);
+}
+.secondary {
+  background: var(--secondary);
+  border-color: var(--secondary-border);
+}
+
+.error {
+  padding: 10px 12px;
+  border: 1px solid #f2b8b5;
+  background: #fdecea;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 640px) {
+  .btn {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.sk {
+  background: linear-gradient(90deg, #eef0f6 25%, #f7f8fc 37%, #eef0f6 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.sk-label {
+  height: 12px;
+  width: 34%;
+  border-radius: 10px;
+}
+.sk-input {
+  height: 40px;
+  width: 100%;
+  border-radius: 12px;
+}
+.sk-btn {
+  height: 44px;
+  width: 160px;
+  border-radius: 12px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 6px;
+}
+
+.btn.back {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.counter {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+}

@@ -1,0 +1,12 @@
+<div class="overlay" *ngIf="open" (click)="onBackdrop($event)">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-body">
+      <h2>{{ title }}</h2>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn secondary" type="button" (click)="cancel.emit()">{{ cancelText }}</button>
+      <button class="btn primary" type="button" (click)="confirm.emit()">{{ confirmText }}</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<section class="page">
+  <div class="container">
+    <div class="card">
+      <!-- Toolbar -->
+      <header class="toolbar">
+        <input
+          class="search"
+          type="text"
+          placeholder="Buscar..."
+          [value]="search()"
+          (input)="search.set($any($event.target).value || '')"
+        />
+
+        <button class="btn primary" (click)="goNew()">Agregar</button>
+      </header>
+
+      <!-- Tabla -->
+      <div class="table-wrap">
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Logo</th>
+                <th>Nombre</th>
+                <th class="col-desc">Descripción</th>
+                <th class="col-date">Fecha Liberación</th>
+                <th class="col-date">Fecha Revisión</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody *ngIf="!loading(); else skeletonBody">
+              <tr *ngFor="let p of visible()">
+                <td data-label="Logo">
+                  <img [src]="p.logo" alt="logo" class="logo" />
+                </td>
+
+                <td data-label="Nombre">{{ p.name }}</td>
+                <td data-label="Descripción" class="col-desc">
+                  {{ p.description }}
+                </td>
+                <td data-label="Fecha Liberación" class="col-date">
+                  {{ p.date_release }}
+                </td>
+                <td data-label="Fecha Revisión" class="col-date">
+                  {{ p.date_revision }}
+                </td>
+
+                <td class="actions" data-label="">
+                  <button class="dots" (click)="toggleMenu(p.id)">⋮</button>
+
+                  <div
+                    class="menu"
+                    *ngIf="openMenuId() === p.id"
+                    appClickOutside
+                  >
+                    <button (click)="edit(p)">Editar</button>
+                    <button class="danger" (click)="openDelete(p)">
+                      Eliminar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+
+            <ng-template #skeletonBody>
+              <tbody>
+                <tr *ngFor="let _ of [1, 2, 3, 4, 5]">
+                  <td><div class="sk sk-logo"></div></td>
+                  <td><div class="sk sk-line w-60"></div></td>
+                  <td class="col-desc"><div class="sk sk-line w-90"></div></td>
+                  <td class="col-date"><div class="sk sk-line w-50"></div></td>
+                  <td class="col-date"><div class="sk sk-line w-50"></div></td>
+                  <td class="actions"><div class="sk sk-dot"></div></td>
+                </tr>
+              </tbody>
+            </ng-template>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer tabla -->
+      <div class="table-footer">
+        <span>{{ totalCount() }} Resultados</span>
+
+        <select
+          class="select"
+          [value]="pageSize()"
+          (change)="setPageSizeFromEvent($event)"
+        >
+          <option [value]="5">5</option>
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <app-confirm-dialog
+    [open]="dialogOpen()"
+    [title]="dialogTitle()"
+    (cancel)="closeDelete()"
+    (confirm)="confirmDelete(deleteTarget()!.id)"
+  >
+  </app-confirm-dialog>
+</section>

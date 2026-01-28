@@ -1,27 +1,110 @@
-# TcsTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+## Stack Tecnológico
 
-## Development server
+- **Angular:** 18 (Standalone Architecture)
+- **Node:** v20.19.0
+- **TypeScript**
+- **RxJS + Angular Signals**
+- **Jest**
+- **Arquitectura feature-based**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## Arquitectura
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Standalone Angular Architecture
+El proyecto utiliza la arquitectura **standalone de Angular 18**, eliminando el uso de módulos pesados y mejorando:
 
-## Build
+- Lazy loading
+- Performance
+- Legibilidad
+- Escalabilidad
+- Simplicidad de configuración
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```ts
+@Component({
+  standalone: true
+})
+```
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Feature-Based Architecture (Arquitectura por funcionalidades)
 
-## Running end-to-end tests
+La estructura está organizada por **dominio / funcionalidad**, no por tipo técnico:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+src/app/features/products/
+  ├── components/
+  ├── pages/
+  ├── services/
+  ├── models/
+  ├── validators/
+  ├── resolvers/
+```
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Se implementó un **Resolver** para la carga previa de datos:
+
+```ts
+export const productsResolver: ResolveFn<Product[]> = ...
+```
+> En mi experiencia funcionalidad no se aprovecha
+
+
+## Interceptor Global de Errores
+
+Se implementó un **HttpInterceptor** para el manejo centralizado de excepciones HTTP:
+
+---
+
+## Toast Service
+
+Esto mejora notablemente la experiencia de usuario y desacopla la lógica visual.
+
+---
+
+## Skeleton Loaders
+
+Se implementó un **delay artificial de 2 segundos** para mostrar skeleton loaders y simular carga real:
+
+---
+
+## Testing
+
+```bash
+npm run test
+npm run test:coverage
+```
+
+---
+
+## Instalación
+
+### Requisitos
+
+- Node **v20.19.0**
+- Angular CLI **v18**
+
+### Pasos
+
+```bash
+npm install
+npm run start
+```
+
+El proyecto estará disponible en:
+
+```
+http://localhost:4200
+```
+
+
+---
+
+## Autor
+
+*Bolivar Tapia*  
+Full Stack Developer — AI 
+---
